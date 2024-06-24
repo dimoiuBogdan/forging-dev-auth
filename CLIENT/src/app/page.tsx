@@ -1,13 +1,15 @@
-'use client';
+import { FC } from 'react';
 
-const Homepage = () => {
+const Homepage: FC = () => {
   return (
-    <div>
-      Hoempage Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-      Consequuntur modi necessitatibus, at, officiis repudiandae rerum natus
-      iure nulla itaque soluta nobis molestiae porro veniam, repellat recusandae
-      architecto perferendis neque fugit.
-    </div>
+    <>
+      <div>12312312312</div>
+      {/* <TriggerFetchData />
+      <Suspense fallback={<div>Loading fetch data...</div>}>
+        <FetchData />
+      </Suspense>
+      <FetchDataClick /> */}
+    </>
   );
 };
 

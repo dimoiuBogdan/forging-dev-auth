@@ -9,7 +9,8 @@ import { Inter } from 'next/font/google';
 import 'primeicons/primeicons.css';
 import { PrimeReactProvider } from 'primereact/api';
 import 'primereact/resources/themes/lara-light-cyan/theme.css';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
+import HydrationBoundary from './HydrationBoundary';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -33,11 +34,12 @@ export default function RootLayout({
           <body className={inter.className}>
             <FGNavbar links={LINKS} />
             <GlobalDialogs />
-
-            <main className='container mx-auto px-2 pt-16'>
-              {children}
-              <FGNotification />
-            </main>
+            <FGNotification />
+            <HydrationBoundary>
+              <main className='container mx-auto px-2 pt-16'>
+                <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+              </main>
+            </HydrationBoundary>
           </body>
         </html>
       </PrimeReactProvider>
