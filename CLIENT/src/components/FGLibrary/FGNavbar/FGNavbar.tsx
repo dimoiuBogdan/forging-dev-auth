@@ -37,7 +37,7 @@ const FGNavbar: FC<Props> = ({ links }) => {
     } else {
       hideDialog();
     }
-  }, [openedNavbar]);
+  }, [hideDialog, openedNavbar, showDialog]);
 
   useEffect(() => {
     setOpenedNavbar(false);

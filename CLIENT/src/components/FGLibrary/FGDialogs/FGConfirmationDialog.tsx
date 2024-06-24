@@ -1,6 +1,7 @@
 import { ConfirmDialog } from 'primereact/confirmdialog';
+import { FC } from 'react';
 
-const FGConfirmationDialog = () => {
+const FGConfirmationDialog: FC = () => {
   return <ConfirmDialog />;
 };
 

@@ -7,7 +7,7 @@ const showConfirmationDialog = ({
   reject,
   message,
   header,
-}: ConfirmDialogProps) => {
+}: ConfirmDialogProps): void => {
   confirmDialog({
     message,
     header,

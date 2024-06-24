@@ -1,7 +1,8 @@
+import { FC } from 'react';
 import FGBackgroundDialog from './FGLibrary/FGDialogs/FGBackgroundDialog';
 import FGConfirmationDialog from './FGLibrary/FGDialogs/FGConfirmationDialog';
 
-const GlobalDialogs = () => {
+const GlobalDialogs: FC = () => {
   return (
     <>
       <FGBackgroundDialog />

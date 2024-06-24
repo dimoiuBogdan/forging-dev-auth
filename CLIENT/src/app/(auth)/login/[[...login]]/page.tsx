@@ -1,6 +1,7 @@
-import { SignIn } from "@clerk/nextjs";
+import { SignIn } from '@clerk/nextjs';
+import { FC } from 'react';
 
-const LoginPage = () => {
+const LoginPage: FC = () => {
   return <SignIn />;
 };
 
