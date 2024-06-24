@@ -7,29 +7,43 @@ namespace API.Controllers
     public class BaseController : Controller
     {
         public int param = 1;
+        public static List<string> items = new List<string> { "Dumitru", "Marian", "Marcel", "CucuveauaSpatiala",};
 
         [HttpGet]
-        public IActionResult Get(int param)
+        public IActionResult Get()
         {
-            return new StatusCodeResult(param);
+            return Ok(items);
         }
 
         [HttpPost]
-        public IActionResult Post(int param)
+        public IActionResult Post(int param, [FromBody] string item)
         {
-            return new StatusCodeResult(param);
+            items.Add(item);
+            return Ok(items);
         }
 
-        [HttpPut]
-        public IActionResult Put(int param)
+        [HttpPut("update_at={index}")]
+        public IActionResult Put(int index, [FromBody] string item)
         {
-            return new StatusCodeResult(param);
+            if (index < 0 || index >= items.Count)
+            {
+                return NotFound("Index out of range");
+            }
+
+            items[index] = item;
+            return Ok(items);   
         }
 
-        [HttpDelete]
-        public IActionResult Delete(int param)
+        [HttpDelete("delete_at={index}")]
+        public IActionResult Delete(int index)
         {
-            return new StatusCodeResult(param);
+            if (index < 0 || index >= items.Count)
+            {
+                return NotFound("Index out of range");
+            }
+
+            items.RemoveAt(index);
+            return Ok(items);
         }
     }
 }
