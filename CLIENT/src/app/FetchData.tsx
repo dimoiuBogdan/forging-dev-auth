@@ -1,12 +1,11 @@
 import { fetchDataFromBE } from './actions';
 
 const FetchData = async () => {
-  const data = await fetchDataFromBE();
+  const { data } = await fetchDataFromBE();
 
   return (
-    <div>
-      <div>COMPONENT 2</div>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+    <div className='flex flex-wrap items-center gap-x-4'>
+      {data ? data.map(item => <div key={item}>{item}</div>) : null}
     </div>
   );
 };

@@ -1,23 +1,34 @@
 'use server';
 
+import { revalidateTag } from 'next/cache';
+
 export async function fetchDataFromBE() {
-  const API_URL = 'http://localhost:5296/api/base';
+  const API_URL = 'http://localhost:5296/base';
 
   try {
     const response = await fetch(`${API_URL}?param=200`, {
       method: 'GET',
+      next: {
+        tags: ['fetch'],
+      },
     });
 
-    const data = await response.json();
+    const data: string[] = await response.json();
 
-    return data;
+    return {
+      data,
+    };
   } catch (error) {
-    return 'Error fetching data from BE';
+    return {
+      error: 'Error fetching data from BE',
+    };
   }
 }
 
-export async function postDataToBE() {
-  const API_URL = 'http://localhost:5296/api/base';
+export async function postDataToBE(input: string | undefined) {
+  const API_URL = 'http://localhost:5296/base';
+
+  if (!input) throw new Error('Input is required');
 
   try {
     const response = await fetch(API_URL, {
@@ -25,13 +36,14 @@ export async function postDataToBE() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ param: 200 }),
+      body: JSON.stringify(input),
     });
+
     const data = await response.json();
 
-    return data;
+    revalidateTag('fetch');
 
-    console.log(data);
+    return data;
   } catch (error) {
     console.log(error);
   }

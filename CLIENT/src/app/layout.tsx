@@ -36,9 +36,9 @@ export default function RootLayout({
             <GlobalDialogs />
             <FGNotification />
             <HydrationBoundary>
-              <main className='container mx-auto px-2 pt-16'>
-                <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
-              </main>
+              <Suspense fallback={<div>Loading...</div>}>
+                <main className='container mx-auto px-2 pt-16'>{children}</main>
+              </Suspense>
             </HydrationBoundary>
           </body>
         </html>
