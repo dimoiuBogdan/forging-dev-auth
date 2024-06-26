@@ -1,38 +1,58 @@
 'use client';
 
-import { LoaderIcon } from 'lucide-react';
+import { useNotifications } from '@/data/stores/useNotifications';
+import { LucideLoaderCircle } from 'lucide-react';
+import { FC, useState } from 'react';
 import { useQuery } from 'react-query';
-import { fetchDataFromBE } from './actions';
+import { postDataToBE } from './actions';
 
-const TriggerFetchData = () => {
-  const { isLoading, isError, isSuccess, data, error, refetch } = useGetData();
+const TriggerFetchData: FC = () => {
+  const [input, setInput] = useState<string | undefined>(undefined);
+
+  const { isLoading, refetch } = usePostDataToBE({ input });
 
   return (
-    <div>
+    <div className='my-4 flex gap-x-8'>
+      <input
+        type='text'
+        className='rounded-md border p-2 shadow-md'
+        onChange={e => setInput(e.target.value)}
+      />
       <button
         onClick={() => refetch()}
-        className='rounded-md bg-red-500 px-4 py-2 text-xl font-semibold uppercase tracking-wide text-white shadow-sm transition-all hover:bg-red-600 active:scale-95 disabled:bg-zinc-300'>
-        FETCH DATA
+        disabled={isLoading}
+        className='rounded-md bg-emerald-500 px-4 py-2 text-xl font-semibold uppercase tracking-wide text-white shadow-sm transition-all hover:bg-emerald-600 active:scale-95 disabled:bg-zinc-400'>
+        {isLoading ? <LucideLoaderCircle /> : 'Add Data'}
       </button>
-      <div className='mt-4'>
-        {isLoading ? (
-          <LoaderIcon />
-        ) : isSuccess ? (
-          <pre>{JSON.stringify(data, null, 2)}</pre>
-        ) : isError ? (
-          <div>Something went wrong</div>
-        ) : null}
-      </div>
     </div>
   );
 };
 
 export default TriggerFetchData;
 
-const useGetData = () => {
+type Props = {
+  input: string | undefined;
+};
+const usePostDataToBE = ({ input }: Props) => {
+  const { showNotification } = useNotifications();
+
   return useQuery({
-    queryKey: 'getData',
-    queryFn: () => fetchDataFromBE(),
+    queryKey: ['posts'],
+    queryFn: () => postDataToBE(input),
+    onSuccess: () => {
+      showNotification({
+        severity: 'success',
+        summary: 'Data added successfully',
+        detail: 'Data has been added to the backend',
+      });
+    },
+    onError: () => {
+      showNotification({
+        severity: 'error',
+        summary: 'Error adding data',
+        detail: 'Error adding data to the backend',
+      });
+    },
     enabled: false,
   });
 };

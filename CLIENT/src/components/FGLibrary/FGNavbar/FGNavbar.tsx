@@ -48,7 +48,7 @@ const FGNavbar: FC<Props> = ({ links }) => {
       ref={navbarRef}
       id='navbar'
       className='glass-effect border-b-1 bg-dark-purple fixed left-1/2 top-0 z-40 w-screen -translate-x-1/2 transform border-zinc-200 border-opacity-15 bg-opacity-75 px-4 py-1 font-semibold shadow-md'>
-      <div className='container mx-auto flex max-w-screen-xl items-center justify-between'>
+      <div className='container mx-auto flex items-center justify-between'>
         <FGLogo size='md' />
         <FGHamburger
           openedNavbar={openedNavbar}

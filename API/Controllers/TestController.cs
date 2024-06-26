@@ -16,7 +16,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(int param, [FromBody] string item)
+        public IActionResult Post([FromBody] string item)
         {
             items.Add(item);
             return Ok(items);

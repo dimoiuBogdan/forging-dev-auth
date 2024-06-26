@@ -1,14 +1,14 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
+import FetchData from './FetchData';
+import TriggerFetchData from './TriggerFetchData';
 
 const Homepage: FC = () => {
   return (
     <>
-      <div>12312312312</div>
-      {/* <TriggerFetchData />
+      <TriggerFetchData />
       <Suspense fallback={<div>Loading fetch data...</div>}>
         <FetchData />
       </Suspense>
-      <FetchDataClick /> */}
     </>
   );
 };
