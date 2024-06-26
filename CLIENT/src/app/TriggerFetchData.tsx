@@ -46,7 +46,7 @@ const usePostDataToBE = ({ input }: Props) => {
         detail: 'Data has been added to the backend',
       });
     },
-    onError: error => {
+    onError: () => {
       showNotification({
         severity: 'error',
         summary: 'Error adding data',

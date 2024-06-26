@@ -2,7 +2,10 @@
 
 import { revalidateTag } from 'next/cache';
 
-export async function fetchDataFromBE() {
+export async function fetchDataFromBE(): Promise<{
+  data?: string[];
+  error?: string;
+}> {
   const API_URL = 'http://localhost:5296/base';
 
   try {
@@ -25,7 +28,7 @@ export async function fetchDataFromBE() {
   }
 }
 
-export async function postDataToBE(input: string | undefined) {
+export async function postDataToBE(input: string | undefined): Promise<void> {
   const API_URL = 'http://localhost:5296/base';
 
   if (!input) throw new Error('Input is required');

@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import { fetchDataFromBE } from './actions';
 
-const FetchData = async () => {
+const FetchData: FC = async () => {
   const { data } = await fetchDataFromBE();
 
   return (
